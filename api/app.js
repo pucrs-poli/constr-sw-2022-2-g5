@@ -38,4 +38,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.get('/trajinha', (res) =>{
+  res.send("eh o trajano");
+})
+
 module.exports = app;
