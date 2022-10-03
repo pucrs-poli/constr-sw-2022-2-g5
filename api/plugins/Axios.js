@@ -7,13 +7,23 @@ const getData = (promise) => {
   return promise.then((response) => response?.data).catch((error) => Promise.reject(error));
 };
 
+let token = ''; 
+
 export default class Axios {
   constructor() {
     axios.post('http://localhost:8080/auth/realms/constr-sw-2022-2/protocol/openid-connect/token', 
     {
-        
+        'client_id': 'grupo5',
+        'client-secret': 'tRBObzymISf3klattAGr55x9AWtn6eC8',
+        'username': 'teste@gmail.com',
+        'passwordd': 'admin',
+        'grant_type': 'password'
     },
-    );
+    ).then((res)=>
+        {
+            console.log(res),
+            token = res;
+        });
   }
 
   get(url, config) {
