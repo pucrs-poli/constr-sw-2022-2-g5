@@ -2,4 +2,5 @@ FROM node:18.8.0
 WORKDIR /home/backend
 COPY . .
 RUN npm install
-CMD ["npm", "start"]
+RUN npm run build 
+CMD npm start

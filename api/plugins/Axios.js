@@ -1,16 +1,15 @@
 
-import axios from 'axios';
+const axios = require('axios').default;
 
-const getUrl = (url) => (url ? `/${url.toString().replace(/^\/|\/$/g, '')}` : null);
+let token = '';
 
-const getData = (promise) => {
-  return promise.then((response) => response?.data).catch((error) => Promise.reject(error));
-};
-
-let token = ''; 
-
-export default class Axios {
+class Axios {
+  
   constructor() {
+    this.getToken();
+  }
+
+  getToken(){
     axios.post('http://localhost:8080/auth/realms/constr-sw-2022-2/protocol/openid-connect/token', 
     {
         'client_id': 'grupo5',
@@ -25,24 +24,27 @@ export default class Axios {
             token = res;
         });
   }
-
-  get(url, config) {
-    return getData(this.client.get(getUrl(url), config));
+ 
+  get(url) {
+    return axios.get(url, {'Authorization': 'Bearer '+ token});
   }
 
-  post(url, data, config) {
-    return this.client.post(getUrl(url), data, config);
+  post(url, data) {
+    return axios.post(url, data, {'Authorization': 'Bearer '+ token});
   }
 
-  put(url, data, config) {
-    return this.client.put(getUrl(url), data, config);
+  put(url, data) {
+    return axios.put(url, data, {'Authorization': 'Bearer '+ token});
   }
 
-  patch(url, data, config) {
-    return this.client.patch(getUrl(url), data, config);
+  patch(url, data) {
+    return axios.patch(url, data, {'Authorization': 'Bearer '+ token});
   }
 
-  delete(url, config) {
-    return this.client.delete(getUrl(url), config);
+  delete(url) {
+    return axios.post(url, {'Authorization': 'Bearer '+ token});
   }
 }
+
+module.exports = Axios;
+

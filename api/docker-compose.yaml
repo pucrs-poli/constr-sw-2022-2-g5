@@ -17,11 +17,4 @@ services:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
     networks:
       - constr-sw-2022-2
-  backend:
-    container_name: api
-    build: .
-    ports:
-      - 3000:3000
-    networks:
-      - constr-sw-2022-2
       
