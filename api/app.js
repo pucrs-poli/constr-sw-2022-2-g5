@@ -4,12 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var axios = require('./plugins/Axios');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 //import routes
 var routes = require('./routes');
 var app = express();
 
 // view engine setup
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,8 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'html');
+app.set('view engine', 'html');
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //router
 app.use('/', routes);

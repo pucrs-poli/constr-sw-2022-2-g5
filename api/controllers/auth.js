@@ -1,24 +1,35 @@
 const {Request, Response, NextFunction} = require( "express");
 const axios = require("axios");
+const FormData = require("form-data");
 
 const realm = "constr-sw-2022-2";
 
 // login in keycloak
 const login = async (req, res) => {
-  const params = {
-        'client_id': 'grupo5',
-        'client-secret': 'tRBObzymISf3klattAGr55x9AWtn6eC8',
-        'username': 'teste@gmail.com',
-        'passwordd': 'admin',
-        'grant_type': 'password'
+  const params = new URLSearchParams();
+ 
+  params.append("client_id", 'grupo5');
+  params.append("client_secret", 'tRBObzymISf3klattAGr55x9AWtn6eC8');
+  params.append("username", 'aloisiomiguelb@gmail.com');
+  params.append("password", '12345');
+  params.append("grant_type", "password");
+  try{
+      let response = await axios.post(
+        `http://localhost:8080/auth/realms/constr-sw-2022-2/protocol/openid-connect/token`,
+        params,
+        {
+          headers:{
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        },
+      );
+    
+      return await res.status(200).json(response.data);
+  }catch(e){
+      console.log("oi");
+      console.log(e);
+      return res.status(500).json(e);
   }
-
-  let response = await axios.post(
-    `http://localhost:8080/auth/realms/${realm}/protocol/openid-connect/token`,
-    params
-  );
-
-  return res.status(200).json(response.data);
 };
 //userinfo
 const userInfo = async (req, res) => {
