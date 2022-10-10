@@ -70,12 +70,51 @@
                   "name": "access_token",
                   "in": "header",
                   "description": "KeyCloak token created when login"
+                },
+                {
+                    "name": "username",
+                    "in": "body",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "enable",
+                    "in": "body",
+                    "required": false,
+                    "type": "bool"
+                },
+                {
+                    "name": "emailVerified",
+                    "in": "body",
+                    "required": false,
+                    "type": "bool"
+                },
+                {
+                    "name": "firstName",
+                    "in": "body",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "lastName",
+                    "in": "body",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "email",
+                    "in": "body",
+                    "required": true,
+                    "type": "string"
                 }
               ],
               "produces": ["application/json"],
               "responses": {
                 "201": {
-                  "description": "New user is created"
+                  "description": "New user is created",
+                  "schema": {
+                    "$ref": "#/definitions/User"
+                  }
                 }
               }
             },
@@ -93,7 +132,10 @@
                 "produces": ["application/json"],
                 "responses": {
                   "200": {
-                    "description": "All users are returned"
+                    "description": "All users are returned",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                      }
                   }
                 }
               }
@@ -198,6 +240,36 @@
                 "type": "date"
             }
           }
-        }
+        },
+        "User": {
+            "required": ["id", "createdTimestamp", "username", "enabled", "emailVerified", "firstName", "lastName", "email"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "uniqueItems": true
+              },
+              "createdTimestamp": {
+                "type": "timestamp"
+              },
+              "username": {
+                "type": "date"
+              },
+              "enabled": {
+                "type": "bool"
+              },
+              "emailVerified": {
+                  "type": "bool"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+            }
+            }
+          }
       }
   }
