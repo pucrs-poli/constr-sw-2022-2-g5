@@ -1,213 +1,203 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
-        "version": "1.0.0",
-        "title": "Tasks API",
-        "contact": {
-            "email": "abc@gmail.com"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        }
+      "version": "1.0.0",
+      "title": "KeyCloak API",
+      "description": "KeyCloak API information",
+      "servers": ["http://localhost:3000"]
     },
+    "host": "localhost:3000",
+    "basePath": "/",
     "schemes": ["http"],
-    "host": "localhost:3080",
-    "basePath": "/api",
-    "paths" : {
-        "/todos" : {
-            "get" : {
-                "summary" : "Get all the tasks",
-                "description": "Get all the tasks",
-                "produces": ["application/json"],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/todo" : {
-            "post" : {
-                "summary" : "Save the task",
-                "description": "Save the task",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "task object",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "task" : {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
-                                } 
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/todos/{id}" : {
-            "put" : {
-                "summary" : "Update the tasks",
-                "description": "Update the tasks",
-                "produces": ["application/json"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "task object",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "task" : {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
-                                } 
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/todo/{id}" : {
-            "delete" : {
-                "summary" : "Delete the task",
-                "description": "Delete the task",
-                "produces": ["application/json"],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        }
-    }, 
-    "definitions": {
-        "todosResponse": {
-            "type": "object",
-            "properties": {
-                "id": {
-                     "type": "integer"
-                },
-                "task": {
-                    "type": "string"
-                },
-                "assignee": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "Task": {
-            "type": "object",
-            "properties": {
-                "task": {
-                    "type": "string"
-                },
-                "assignee": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "InvalidResponse": {
-            "type": "object",
-            "properties": {
-                "statusCode": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
 
+    "paths": {
+        "/login": {
+          "parameters": [
+                {
+                  "name": "client_id",
+                  "in": "body",
+                  "required": true,
+                  "description": "ID of Keycloak client",
+                  "type": "string"
+                },
+                {
+                    "name": "username",
+                    "in": "body",
+                    "required": true,
+                    "description": "Login username",
+                    "type": "string"
+                },
+                {
+                    "name": "password",
+                    "in": "body",
+                    "required": true,
+                    "description": "Login password",
+                    "type": "string"
+                },
+                {
+                    "name": "grant_type",
+                    "in": "body",
+                    "required": true,
+                    "description": "Password grant_type",
+                    "type": "password"
+                }
+              ],
+          "post": {
+            "tags": ["Login"],
+            "summary": "Use to login in Keycloak",
+            "responses": {
+              "200": {
+                "description": "A successful response",
+                "schema": {
+                  "$ref": "#/definitions/Login"
+                }
+              },
+              "500": {
+                "description": "Cannot connect to the server"
+              }
+            }
+          }
+        },
+        "/users": {
+            "post": {
+            "summary": "Create new user",
+              "tags": ["Users"],
+              "description": "Create new user in system",
+              "parameters": [
+                {
+                  "name": "access_token",
+                  "in": "header",
+                  "description": "KeyCloak token created when login"
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "201": {
+                  "description": "New user is created"
+                }
+              }
+            },
+            "get": {
+                "summary": "Get all users",
+                "tags": ["Users"],
+                "description": "Return all users in system",
+                "parameters": [
+                  {
+                    "name": "access_token",
+                    "in": "header",
+                    "description": "KeyCloak token created when login"
+                  }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                  "200": {
+                    "description": "All users are returned"
+                  }
+                }
+              }
+        },
+        "/user/{id}": {
+            "get": {
+                "summary": "Get user with the given ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                      "name": "access_token",
+                      "in": "header",
+                      "description": "KeyCloak token created when login"
+                    }
+                  ],
+                "responses": {
+                  "200": {
+                    "description": "User is returned",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              },
+            "put": {
+              "summary": "Update user with the given ID",
+              "tags": ["Users"],
+              "parameters": [
+                {
+                  "name": "access_token",
+                  "in": "header",
+                  "description": "KeyCloak token created when login"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "User is updated",
+                  "schema": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            },
+            "patch": {
+                "summary": "Patch user with the given ID",
+                "tags": ["Users"],
+                "parameters": [
+                  {
+                    "name": "access_token",
+                    "in": "header",
+                    "description": "KeyCloak token created when login"
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "User is updated",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              },
+            "delete": {
+                "summary": "Delete user with the given ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                      "name": "access_token",
+                      "in": "header",
+                      "description": "KeyCloak token created when login"
+                    }
+                  ],
+                "responses": {
+                  "200": {
+                    "description": "User is deleted",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              }
+          }
+      },
+      "definitions": {
+        "Login": {
+          "required": ["token_type", "access_token", "expires_in", "refresh_token", "referesh_expires_in"],
+          "properties": {
+            "token_type": {
+              "type": "string"
+            },
+            "access_token": {
+              "type": "string",
+              "uniqueItems": true
+            },
+            "expires_in": {
+              "type": "date"
+            },
+            "refresh_token": {
+              "type": "string"
+            },
+            "referesh_expires_in": {
+                "type": "date"
+            }
+          }
         }
-    }
-}
+      }
+  }

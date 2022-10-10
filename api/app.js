@@ -6,9 +6,34 @@ var logger = require('morgan');
 var axios = require('./plugins/Axios');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+
+
 //import routes
 var routes = require('./routes');
 var app = express();
+
+
+// Swagger
+/**
+ * const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      version: '1.0.0',
+      title: 'KeyCloak API',
+      description: 'KeyCloak information',
+      servers: ["http://localhost:3000"]
+    }
+  },
+  apis: ["routes.js"]
+};
+ * const swaggerDocs = swaggerJsDoc(swaggerOptions);
+ */
+
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  swaggerOptions: { persistAuthorization: true }
+}));
+
 
 // view engine setup
 
@@ -19,8 +44,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //router
 app.use('/', routes);
