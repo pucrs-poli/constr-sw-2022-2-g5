@@ -9,8 +9,8 @@ const login = async (req, res) => {
   const params = new URLSearchParams();
  
   params.append("client_id", 'grupo5');
-  params.append("client_secret", 'tRBObzymISf3klattAGr55x9AWtn6eC8');
-  params.append("username", 'aloisiomiguelb@gmail.com');
+  params.append("client_secret", 'PNqNUUUXLEsq5Fh1unA5WDzWaqfHBCwH');
+  params.append("username", 'admin');
   params.append("password", '12345');
   params.append("grant_type", "password");
   try{
