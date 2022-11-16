@@ -8,8 +8,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 
-//import routes
-var routes = require('./routes');
 var app = express();
 
 
@@ -46,7 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'html');
 
 //router
-app.use('/', routes);
+app.use('/', require('./routes/keycloak'));
+app.use('/turma', require('./routes/turmas'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
