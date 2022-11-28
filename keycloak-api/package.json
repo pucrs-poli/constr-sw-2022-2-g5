@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start":"node src/app.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "axios": "^0.27.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "html": "^1.0.0",
+    "http-errors": "~1.6.3",
+    "jade": "^0.29.0",
+    "mongoose": "^6.7.2",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.20",
+    "swagger": "^0.7.5",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "prisma": "^4.6.1"
+  }
+}
