@@ -28,6 +28,7 @@ module.exports = {
         // listen for requests
         app.listen(API_PORT, () => {
           console.log('Connected to mongo & listening on port', API_PORT);
+          console.log('Access URL -> http://localhost:8085/classroom')
         });
         return app;
       })

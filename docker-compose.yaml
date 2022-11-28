@@ -13,9 +13,9 @@ services:
     image: jboss/keycloak:latest
     ports:
       - 8080:8080
-    environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=a12345678
+    #environment:
+      #- KEYCLOAK_USER=admin
+      #- KEYCLOAK_PASSWORD=a12345678
     volumes:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
     networks:
@@ -43,8 +43,8 @@ services:
     ports:
       - 8085:8085
     environment:
-      - KEYCLOAK_API_HOST=host.docker.internal
-      - KEYCLOAK_API_PORT=3000
+      #- KEYCLOAK_API_HOST=host.docker.internal
+      #- KEYCLOAK_API_PORT=3000
       - MONGODB_HOST=mongodb
       - MONGODB_PORT=27017
       - MONGODB_USER=admin
