@@ -1,5 +1,5 @@
 
-//var { CannotFindClassroomError } = require('../errors/classroomError');
+var { CannotFindClassroomError } = require('../errors/classroomsErrors');
 const Classroom = require("../models/Classroom");
 
 module.exports = {
@@ -15,8 +15,9 @@ module.exports = {
 
   getClassroom: async function (id) {
     const classroom = await Classroom.findById(id);
+    console.log(classroom)
     if (!classroom) {
-    //  throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
     }
     return classroom;
   },
@@ -24,7 +25,7 @@ module.exports = {
   updateClassroom: async function (id, classroom) {
     const classroomAux = await Classroom.findById(id);
     if (!classroomAux) {
-    //  throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
     }
 
     return await Classroom.findByIdAndUpdate(id, classroom);
@@ -33,7 +34,7 @@ module.exports = {
   deleteClassroom: async function (id) {
     const classroom = await Classroom.findById(id);
     if (!classroom) {
-    //  throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
     }
     return await Classroom.findByIdAndDelete(id);
   },

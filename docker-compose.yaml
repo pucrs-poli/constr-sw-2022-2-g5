@@ -1,6 +1,7 @@
 version: "3.4"
 networks:
   constr-sw-2022-2:
+    external: true
 volumes:
   keycloak-data:
     external: true
