@@ -20,7 +20,8 @@ docker compose up
 
 Esse comando irá subir dois containers:
 - Keycloak na porta `8080`
-- API Backend porta `3000`
+- Keycloak API na porta `3000`
+- Turmas API porta `8085`
 
 Para encerrar a execução dos serviços, utilize o comando a seguir:
 
@@ -28,5 +29,8 @@ Para encerrar a execução dos serviços, utilize o comando a seguir:
 docker-compose down
 ```
 
-## Documentação da API
+## Documentação do Keycloak API
 Link para documentação das rotas com Swagger: [http://localhost:3000/api-docs/](http://localhost:3000/api-docs/)
+
+## Documentação da Turmas API
+Link para documentação das rotas com Swagger: [http://localhost:8085/api-docs/](http://localhost:3000/api-docs/)
