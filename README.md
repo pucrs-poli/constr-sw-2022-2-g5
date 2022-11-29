@@ -20,7 +20,7 @@ docker-compose up
 
 Esse comando irá subir dois containers:
 - Keycloak na porta `8080`
-- Keycloak API na porta `3000`
+- Keycloak API na porta `4000`
 - Turmas API porta `8085`
 
 Para encerrar a execução dos serviços, utilize o comando a seguir:
