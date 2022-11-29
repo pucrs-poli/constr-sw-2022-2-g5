@@ -15,7 +15,7 @@ npm install
 Após a instalação das dependências, execute o comando a seguir para subir todos os serviços:
 
 ```sh
-docker compose up
+docker-compose up
 ```
 
 Esse comando irá subir dois containers:
