@@ -15,7 +15,7 @@ module.exports = {
     try {
       await mongoose.connect(url);
       await Classroom.createCollection();
-      console.log("[OK] Classroom collection database.\n");
+      console.log("---------- Starting Classes collection ----------\n");
     } catch (error) {
       throw error;
     }
@@ -27,8 +27,8 @@ module.exports = {
         Classroom.createCollection();
         // listen for requests
         app.listen(API_PORT, () => {
-          console.log('Connected to mongo & listening on port', API_PORT);
-          console.log('Access URL -> http://localhost:8085/classroom')
+          console.log('---------- Connected to mongo & listening on port', API_PORT, ' ----------');
+          console.log('Access URL -> http://localhost:', API_PORT, '/classroom')
         });
         return app;
       })
