@@ -1,6 +1,5 @@
 FROM node:18.8.0
-WORKDIR /home/backend
+WORKDIR /home/keycloak-api
 COPY . .
 RUN npm install
-RUN npm run build 
-CMD npm start
+CMD ["npm", "start"]
