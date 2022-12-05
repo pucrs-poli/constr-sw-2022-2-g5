@@ -15,9 +15,8 @@ module.exports = {
 
   getClassroom: async function (id) {
     const classroom = await Classroom.findById(id);
-    console.log(classroom)
     if (!classroom) {
-      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('It was not possible to find this classroom.');
     }
     return classroom;
   },
@@ -25,7 +24,7 @@ module.exports = {
   updateClassroom: async function (id, classroom) {
     const classroomAux = await Classroom.findById(id);
     if (!classroomAux) {
-      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('It was not possible to find this classroom.');
     }
 
     return await Classroom.findByIdAndUpdate(id, classroom);
@@ -34,7 +33,7 @@ module.exports = {
   deleteClassroom: async function (id) {
     const classroom = await Classroom.findById(id);
     if (!classroom) {
-      throw new CannotFindClassroomError('Não foi possível encontrar esta turma.');
+      throw new CannotFindClassroomError('It was not possible to find this classroom.');
     }
     return await Classroom.findByIdAndDelete(id);
   },

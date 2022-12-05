@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const {API_PORT} = require('./config');
 const mongoose = require('./database/mongoose');
+const {Router} = require("./routes/classroom2");
 
 /*
   Create a new express application instance and set middlewares.
@@ -16,7 +17,7 @@ app.use(cors());
 (async () => {
   try {
     await mongoose.startDatabase();
-    console.log("[OK] Connected to MongoDB server.\n");
+    console.log("---------- Starting Classes collection ----------\n");
   } catch (error) {
     console.log("[FAIL] Error connecting to MongoDB server.\n", error);
     process.exit(1);
@@ -27,8 +28,12 @@ app.use(cors());
   Start the API server.
 */
 app.listen(API_PORT, () => {
-  console.log(`Buildings and Classrooms API running on port ${API_PORT}.\n`);
+  console.log('---------- Connected to mongo & listening on port', API_PORT, ' ----------');
+  console.log('Access URL -> http://localhost:8085/classroom')
 });
 
-app.use('/classroom', require('./routes/classrooms'));
+//app.use('/classroom', require('./routes/classrooms'));
 
+
+const router = new Router(app);
+router.setupRoutes();
